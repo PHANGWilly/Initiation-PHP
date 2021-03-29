@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WillyZon</title>
+</head>
+<body>
+<?php
+    if(isset($_POST["bouton"]))
+    {
+        $article = $_POST["article"];
+        $quantite = $_POST["quantite"];
+        echo"<h1>Facture</h1> <hr>";
+        //echo "$article $quantite";
+        if($article==4.99 || $article==6.99)
+        {
+            $remise = 0;
+            $total = $article * $quantite;
+            if($quantite >= 10)
+            {
+                $remise = $total * 0.2;
+                $total = $total * 0.8;
+            } 
+            if($article == 4.99)
+            {
+                echo "Clé 8 Go  ----- $article € ------ $quantite";
+            } 
+            else
+            {
+                echo "Clé 16 Go  ----- $article € ------ $quantite";
+            }
+        }
+        else if ($article==12.99)
+        {
+            $nbGratuites = (int)($quantite/3);
+            $total = ($quantite - $nbGratuites) * $article; 
+            $remise = $quantite-$nbGratuites; 
+            echo "Clé 64 Go ----- $article € ----- $quantite ----- $nbGratuites sont offfertes";
+            echo "<br> <br>Vous allez alors payer $remise clé(s)";
+        }  
+        echo "<br> <br> Soit un total de  $total €"; 
+    }
+    else
+    {
+?>
+   <h1>Formulaire de Commande<h1><hr>
+        <form action="Commande.php" method="post"> <!-- action="" ou action="nomdumemefichier" renvoie au fichier-->
+        Article :
+        <select name="article" id=""> Article :
+            <option value="4.99"> Clé 8go </option>
+            <option value="6.99"> Clé 16go </option>
+            <option value="12.99"> Clé 64go </option>
+        </select> <br> <br>
+        Quantité : <input type="number" min="1" name="quantite" required>  <br> <br>
+        <input type="submit" value="Commander" name="bouton">
+        </form>
+        <hr>
+<?php
+    }   
+?>
+</body>
+</html>
