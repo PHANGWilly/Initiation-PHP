@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="../css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice</title>
+</head>
+<body>
+    <h1> Nombres pour le calcul <h1>
+        <form action="" method="post">
+            <input type="number" name="nb1" required placeholder="Nombre 1 :">
+            <select name="op">
+                <option value="+"> + </option>
+                <option value="-"> - </option>
+                <option value="*"> * </option>
+                <option value="/"> / </option>
+            </select>
+            <input type="numer" name="nb2" required placeholder="Nombre 2 :">  <br> <br>
+            <input type="submit" value="Envoyer" name="calcul">
+        </form>
+        <hr>
+        <?php
+        echo "<h1>Résultat</h1>";
+            if(isset($_POST["calcul"]))
+            {
+                $nb1=$_POST["nb1"];
+    $nb2=$_POST["nb2"];
+    $op=$_POST["op"];
+
+
+    switch($op)
+    {
+        case'+': $res = $nb1 + $nb2; 
+            break;
+        case'-': $res = $nb1 - $nb2; 
+            break;
+        case'*': $res = $nb1 * $nb2; 
+            break;
+        case'/': if($nb2 == 0) $res = "<br><br>Division par 0 = IMPOSSIBLE !"; 
+        else $res = $nb1 / $nb2;  
+            break;
+    } 
+
+    echo "<h3> Le calcul est : $nb1 $op  $nb2 = $res <h3>";
+            }
+        ?>
+</body>
+</html>
